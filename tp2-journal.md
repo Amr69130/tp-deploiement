@@ -131,3 +131,4 @@ amrouche@amrouche:/opt/todo-stack$ docker compose ps
 NAME IMAGE STATUS PORTS
 todo-stack-app-1 ghcr.io/amr69130/todo-api... Up (healthy) 3000/tcp
 todo-stack-nginx-1 nginx:alpine Up 0.0.0.0:80->80/tcp
+![Vérification du demarrage stack](images/image8_stack_up.png)

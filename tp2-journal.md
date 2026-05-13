@@ -102,3 +102,32 @@ Avant de lancer la stack, j'ai vérifié la présence des fichiers et les permis
 
 J'ai vérifié le contenu de mes fichiers de configuration pour m'assurer que les variables et les paramètres du proxy Nginx étaient corrects.
 ![Vérification des fichiers et permissions](images/image7_contenu_config.png)
+
+### Orchestration avec Docker Compose
+
+Le but est de mettre en place une stack complète (API + Reverse Proxy) automatisée.
+
+1. Configuration et fichiers
+   J'ai créé les trois fichiers nécessaires dans /opt/todo-stack :
+
+.env : Pour les secrets (JWT, version, utilisateur).
+
+nginx.conf : Pour configurer Nginx en mode Reverse Proxy.
+
+docker-compose.yml : Pour définir les services, les réseaux et les volumes.
+
+2. Débogage du Healthcheck
+   Lors du premier lancement via docker compose up -d, le conteneur de l'application restait en état unhealthy, empêchant Nginx de démarrer.
+
+Analyse : La commande docker compose logs app montrait que l'API était bien lancée (API listening on 3000), mais le test de santé (basé sur curl) échouait car l'utilitaire n'était pas présent dans l'image.
+
+Correction : J'ai modifié le docker-compose.yml pour utiliser une commande nc (netcat) plus légère pour vérifier l'ouverture du port.
+
+3. Lancement réussi
+   Après correction, la stack a démarré correctement.
+
+Vérification de l'état des services :
+amrouche@amrouche:/opt/todo-stack$ docker compose ps
+NAME IMAGE STATUS PORTS
+todo-stack-app-1 ghcr.io/amr69130/todo-api... Up (healthy) 3000/tcp
+todo-stack-nginx-1 nginx:alpine Up 0.0.0.0:80->80/tcp

@@ -61,3 +61,7 @@ L'image est désormais stockée sur GitHub Packages, prête à être déployée 
 Le conteneur est désormais actif et l'API répond correctement.
 
 ![Capture d'écran du conteneur opérationnel](images/image4_docker_ps_healthy.png)
+
+### Preuve de présence dans les packages de Github :
+
+![Capture d'écran de github](images/image5_packages_github.png)

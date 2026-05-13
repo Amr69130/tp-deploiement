@@ -65,3 +65,40 @@ Le conteneur est désormais actif et l'API répond correctement.
 ### Preuve de présence dans les packages de Github :
 
 ![Capture d'écran de github](images/image5_packages_github.png)
+
+Étape 4 : Docker Compose et orchestration
+
+1. Préparation de l'environnement
+   J'ai créé le dossier /opt/todo-stack/ pour centraliser les fichiers de configuration de la stack. J'ai modifié les droits du dossier pour permettre mon utilisateur d'y travailler sans restrictions.
+
+sudo mkdir -p /opt/todo-stack
+sudo chown $USER:$USER /opt/todo-stack
+cd /opt/todo-stack
+
+### 2. Configuration du Reverse Proxy et des variables d'environnement
+
+J'ai configuré Nginx pour qu'il agisse comme porte d'entrée sur le port 80 et redirige le trafic vers mon application. J'ai également créé un fichier `.env` pour stocker mes informations sensibles (nom d'utilisateur, version de l'image, secret JWT) de manière sécurisée.
+
+**Fichier `nginx.conf` :**
+
+```nginx
+events {}
+http {
+    server {
+        listen 80;
+        location / {
+            proxy_pass http://app:3000;
+        }
+    }
+}
+
+```
+
+### Vérification des fichiers de configuration :
+
+Avant de lancer la stack, j'ai vérifié la présence des fichiers et les permissions de sécurité du fichier `.env`.
+
+![Vérification des fichiers et permissions](images/image6_verif_fichiers_stack.png)
+
+J'ai vérifié le contenu de mes fichiers de configuration pour m'assurer que les variables et les paramètres du proxy Nginx étaient corrects.
+![Vérification des fichiers et permissions](images/image7_contenu_config.png)

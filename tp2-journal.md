@@ -34,3 +34,24 @@ J'ai créé un `Dockerfile` en utilisant le principe du **Multi-stage build**.
 - La deuxième étape (`runtime`) crée une image finale légère en ne gardant que le strict nécessaire.
 
 J'ai également ajouté un fichier `.dockerignore` pour éviter d'inclure des fichiers inutiles (comme `node_modules` ou les dossiers de tests) dans l'image.
+
+### Résultat du build :
+
+L'image a été construite avec succès. Grâce à l'utilisation d'une image de base `alpine` et au nettoyage des dépendances de développement (`npm prune`), l'image finale est optimisée.
+
+![Capture d'écran du build et de la taille de l'image](images/image2_build_success.png)
+
+## Étape 3 : Publication sur GitHub Packages (GHCR)
+
+Une fois l'image construite localement, je l'ai publiée sur le registre de conteneurs de GitHub.
+Pour ce faire, j'ai généré un PAT (Personal Access Token) avec les portées (scopes) write:packages afin d'autoriser ma VM à s'authentifier sur le registre GHCR (GitHub Container Registry).
+
+### Actions :
+
+1. Connexion au registre avec un Personal Access Token (PAT) :
+   `docker login ghcr.io -u Amr69130`
+2. Tag de l'image pour l'associer à mon dépôt GitHub.
+3. Push de l'image vers GHCR.
+   ![Capture d'écran du push vers GHCR](images/image3_docker_push.png)
+
+L'image est désormais stockée sur GitHub Packages, prête à être déployée sur n'importe quel serveur.

@@ -55,3 +55,9 @@ Pour ce faire, j'ai généré un PAT (Personal Access Token) avec les portées (
    ![Capture d'écran du push vers GHCR](images/image3_docker_push.png)
 
 L'image est désormais stockée sur GitHub Packages, prête à être déployée sur n'importe quel serveur.
+
+### Preuve du bon fonctionnement :
+
+Le conteneur est désormais actif et l'API répond correctement.
+
+![Capture d'écran du conteneur opérationnel](images/image4_docker_ps_healthy.png)
